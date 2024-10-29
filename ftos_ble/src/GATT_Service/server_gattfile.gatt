@@ -1,0 +1,28 @@
+// September 21, 2024
+// Pico W project to create a build with FreeRTOS and BTstack (Bluetooth LE)
+// See a description of this whole build process in Hunter Adams’ webpage:
+// https://vanhunteradams.com/Pico/BLE/GATT_Server.html#Building-an-attribute-database-with-BTstack
+
+PRIMARY_SERVICE, GAP_SERVICE
+CHARACTERISTIC, GAP_DEVICE_NAME, READ, "PICO_SERVER"
+
+PRIMARY_SERVICE, GATT_SERVICE
+CHARACTERISTIC, GATT_DATABASE_HASH, READ,
+
+// First custom service
+PRIMARY_SERVICE, 0000FF10-0000-1000-8000-00805F9B34FB
+
+// Characteristic A - read only, dynamic, with notifications
+// Read-only Heartbeat Counter
+CHARACTERISTIC, 0000FF11-0000-1000-8000-00805F9B34FB, DYNAMIC | READ | NOTIFY,
+CHARACTERISTIC_USER_DESCRIPTION, READ,
+
+// Characteristic B - write without response, notify
+// Command to Pico
+CHARACTERISTIC, 0000FF12-0000-1000-8000-00805F9B34FB, WRITE_WITHOUT_RESPONSE | READ | NOTIFY | DYNAMIC,
+CHARACTERISTIC_USER_DESCRIPTION, READ,
+
+// Characteristic C - read only, dynamic, with notifications
+// LED Status and Control
+CHARACTERISTIC, 0000FF13-0000-1000-8000-00805F9B34FB, WRITE_WITHOUT_RESPONSE | READ | DYNAMIC,
+CHARACTERISTIC_USER_DESCRIPTION, READ,
