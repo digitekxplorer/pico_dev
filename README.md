@@ -1,2 +1,2 @@
 # pico_dev
-Development for Raspberry Pi Pico projects.
+Development for Raspberry Pi Pico and Pico W projects.
